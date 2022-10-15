@@ -59,6 +59,8 @@ class MyWaveformGenerator
 }
 ```
 
+![Laravel](laravel-call-screenshot.png)
+
 ## CLI
 
 This package has built in cli handler, allowing calls via console:
