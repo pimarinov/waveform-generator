@@ -177,6 +177,8 @@ Pimarinov\WaveformGenerator\WaveformGenerator
 
 ```
 
+![test-output](phpunit-test-output.png)
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
