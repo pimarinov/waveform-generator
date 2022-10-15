@@ -1,0 +1,6 @@
+... silence_start: 0
+... silence_end: 2.00 | silence_duration: 2.00
+... silence_start: 4.00
+... silence_end: 6.00 | silence_duration: 2.00
+... silence_start: 8.00
+... silence_end: 10.00 | silence_duration: 2.00
