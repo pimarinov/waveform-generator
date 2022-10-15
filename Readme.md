@@ -19,11 +19,23 @@ data (inverted by `Pimarinov\WaveformGenerator\RawSilenceToTalkTimesInverter`). 
 built in `->generate()` method will give you the waveform object.
 
 ```php
+use Pimarinov\WaveformGenerator\RawSilenceToTalkTimesInverter;
 use Pimarinov\WaveformGenerator\WaveformGenerator;
 
-(function ($userRawSilenceData, $customerRawSilenceData) {
-    return (new WaveformGenerator($userRawSilenceData, $customerRawSilenceData))
+(function ($userRawSilenceFilePath, $customerRawSilenceFilePath) {
+
+    $userRaw = file_get_contents($userRawSilenceFilePath);
+    $customerRaw = file_get_contents($customerRawSilenceFilePath);
+
+    $userTalkTimes = (new RawSilenceToTalkTimesInverter($userRaw))
+        ->collect();
+
+    $customerTalkTimes = (new RawSilenceToTalkTimesInverter($customerRaw))
+        ->collect();
+
+    return (new WaveformGenerator($userTalkTimes, $customerTalkTimes))
             ->generate();
+
 })(): WaveformGenerator
 
 ```
