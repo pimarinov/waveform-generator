@@ -1,5 +1,5 @@
 
-# Waveform Generator - Jiminny [Backend Task](jiminny-backend-task.md) by Plamen Marinov"
+# Waveform Generator - Jiminny [Backend Task](jiminny-backend-task.md) by Plamen Marinov
 
 The goal of this package is to make waveform object from 2 participants (user & customer)
 raw silence data.
