@@ -1,8 +1,8 @@
 
-# Waveform Generator - Jiminny [Backend Task](jiminny-backend-task.md) by Plamen Marinov
+# Waveform Generator - Jiminny [Backend Task](jiminny-backend-task.md)
 
-The goal of this package is to make waveform object from 2 participants (user & customer)
-raw silence data.
+The goal of this package is to make waveform object from both participants
+(user & customer) raw silence data.
 
 ## Installation
 
@@ -14,12 +14,11 @@ composer require pimarinov/waveform-generator
 
 ## Usage
 
-You can extend the `Pimarinov\WaveformGenerator\WaveformGenerator` passing 2 participants
-data (inverted by `Pimarinov\WaveformGenerator\RawSilenceToTalkTimesInverter`). The
-built in `->generate()` method will give you the waveform object.
+You may extend the `Pimarinov\WaveformGenerator\WaveformGenerator`. Then pass both callers
+talk times (inverted by `Pimarinov\WaveformGenerator\SpeakerTalkTimes` from silence raw).
 
 ```php
-use Pimarinov\WaveformGenerator\RawSilenceToTalkTimesInverter;
+use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
 use Pimarinov\WaveformGenerator\WaveformGenerator;
 
 (function ($userRawSilenceFilePath, $customerRawSilenceFilePath) {
@@ -27,23 +26,23 @@ use Pimarinov\WaveformGenerator\WaveformGenerator;
     $userRaw = file_get_contents($userRawSilenceFilePath);
     $customerRaw = file_get_contents($customerRawSilenceFilePath);
 
-    $userTalkTimes = (new RawSilenceToTalkTimesInverter($userRaw))
-        ->collect();
+    $userTalkTimes = (new SpeakerTalkTimes($userRaw))
+        ->getTalkTimes();
 
-    $customerTalkTimes = (new RawSilenceToTalkTimesInverter($customerRaw))
-        ->collect();
+    $customerTalkTimes = (new SpeakerTalkTimes($customerRaw))
+        ->getTalkTimes();
 
     return (new WaveformGenerator($userTalkTimes, $customerTalkTimes))
-            ->generate();
+            ->getWaveform();
 
-})(): WaveformGenerator
+})(): Waveform
 
 ```
 
 Alternative way of a custom `MyWaveformGenerator`:
 
 ```php
-use Pimarinov\WaveformGenerator\RawSilenceToTalkTimesInverter;
+use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
 use Pimarinov\WaveformGenerator\WaveformGenerator;
 
 class MyWaveformGenerator
@@ -57,16 +56,16 @@ class MyWaveformGenerator
         $this->customerRaw = file_get_contents($this->customerRawFile);
     }
 
-    public function generate(): \Pimarinov\WaveformGenerator\Data\Waveform
+    public function getWaveform(): \Pimarinov\WaveformGenerator\Data\Waveform
     {
-        $userTalkTimes = (new RawSilenceToTalkTimesInverter($this->userRaw))
-            ->collect();
+        $userTalkTimes = (new SpeakerTalkTimes($this->userRaw))
+            ->getTalkTimes();
 
-        $customerTalkTimes = (new RawSilenceToTalkTimesInverter($this->customerRaw))
-            ->collect();
+        $customerTalkTimes = (new SpeakerTalkTimes($this->customerRaw))
+            ->getTalkTimes();
 
         return (new WaveformGenerator($user, $customer))
-            ->generate();
+            ->getWaveform();
     }
 }
 ```
@@ -138,24 +137,24 @@ vendor/bin/phpunit --coverage-text
 
 Output
 ```bash
-PHPUnit 10.0-gc529d6b0d by Sebastian Bergmann and contributors.
+PHPUnit 10.0-gce5b6af0c by Sebastian Bergmann and contributors.
 
 Runtime:       PHP 8.1.9 with Xdebug 3.1.3
 Configuration: C:\dev\waveform-generator\phpunit.xml.dist
 
 ....                                                                4 / 4 (100%)
 
-Time: 00:00.983, Memory: 16.00 MB
+Time: 00:00.246, Memory: 10.00 MB
 
 OK (4 tests, 6 assertions)
 
-Generating code coverage report in Clover XML format ... done [00:00.005]
+Generating code coverage report in Clover XML format ... done [00:00.004]
 
-Generating code coverage report in HTML format ... done [00:00.095]
+Generating code coverage report in HTML format ... done [00:00.085]
 
 
 Code Coverage Report:
-  2022-10-15 13:25:20
+  2022-10-16 13:01:52
 
  Summary:
   Classes: 100.00% (6/6)
@@ -164,13 +163,13 @@ Code Coverage Report:
 
 Pimarinov\WaveformGenerator\Cli\Handler
   Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 15/ 15)
-Pimarinov\WaveformGenerator\Data\TalkTimesOfParticipant
+Pimarinov\WaveformGenerator\Data\CliHandlerArgs
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+Pimarinov\WaveformGenerator\Data\TalkTimes
   Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  7/  7)
 Pimarinov\WaveformGenerator\Data\Waveform
   Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
-Pimarinov\WaveformGenerator\Data\WaveformCliArgs
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
-Pimarinov\WaveformGenerator\RawSilenceToTalkTimesInverter
+Pimarinov\WaveformGenerator\SpeakerTalkTimes
   Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 19/ 19)
 Pimarinov\WaveformGenerator\WaveformGenerator
   Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  7/  7)
