@@ -21,53 +21,24 @@ talk times (inverted by `Pimarinov\WaveformGenerator\SpeakerTalkTimes` from sile
 use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
 use Pimarinov\WaveformGenerator\WaveformGenerator;
 
-(function ($userRawSilenceFilePath, $customerRawSilenceFilePath) {
+$waveform = (function ($userRawSilenceFilePath, $customerRawSilenceFilePath): Waveform {
 
-    $userRaw = file_get_contents($userRawSilenceFilePath);
-    $customerRaw = file_get_contents($customerRawSilenceFilePath);
+    $userSilence = file_get_contents($userRawSilenceFilePath);
+    $customerSilence = file_get_contents($customerRawSilenceFilePath);
 
-    $userTalkTimes = (new SpeakerTalkTimes($userRaw))
+    $userTalkTimes = (new SpeakerTalkTimes($userSilence))
         ->getTalkTimes();
 
-    $customerTalkTimes = (new SpeakerTalkTimes($customerRaw))
+    $customerTalkTimes = (new SpeakerTalkTimes($customerSilence))
         ->getTalkTimes();
 
     return (new WaveformGenerator($userTalkTimes, $customerTalkTimes))
             ->getWaveform();
 
-})(): Waveform
+})();
 
-```
+print_r($waveform);
 
-Alternative way of a custom `MyWaveformGenerator`:
-
-```php
-use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
-use Pimarinov\WaveformGenerator\WaveformGenerator;
-
-class MyWaveformGenerator
-{
-    private string $userRaw;
-    private string $customerRaw;
-
-    public function __construct(private string $userRawFile, private string $customerRawFile)
-    {
-        $this->userRaw = file_get_contents($this->userRawFile);
-        $this->customerRaw = file_get_contents($this->customerRawFile);
-    }
-
-    public function getWaveform(): \Pimarinov\WaveformGenerator\Data\Waveform
-    {
-        $userTalkTimes = (new SpeakerTalkTimes($this->userRaw))
-            ->getTalkTimes();
-
-        $customerTalkTimes = (new SpeakerTalkTimes($this->customerRaw))
-            ->getTalkTimes();
-
-        return (new WaveformGenerator($user, $customer))
-            ->getWaveform();
-    }
-}
 ```
 
 ![Laravel](laravel-call-screenshot.png)
