@@ -1,12 +1,12 @@
 
 # Waveform Generator - Jiminny [Backend Task](jiminny-backend-task.md)
 
-The goal of this package is to make waveform object from both participants
-(user & customer) raw silence data.
+The goal of this package is to make Waveform object from the silence raw data
+of both conversation participants (User & Customer).
 
 ## Installation
 
-You can install the package via composer:
+Install via Composer:
 
 ```bash
 composer require pimarinov/waveform-generator
@@ -74,7 +74,7 @@ class MyWaveformGenerator
 
 ## CLI
 
-This package has built in cli handler, allowing calls via console:
+This package has built in cli handler, allowing calls via Console:
 
 ```bash
 php bin/waveform.php --user tests/dummy-raw-silence/user.dummy-raw-silence.txt --customer tests/dummy-raw-silence/customer.dummy-raw-silence.txt
