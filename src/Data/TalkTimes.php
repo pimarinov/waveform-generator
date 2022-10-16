@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Pimarinov\WaveformGenerator\Data;
 
-class TalkTimesOfParticipant
+class TalkTimes
 {
     public array $times = [];
     public float $total = 0;

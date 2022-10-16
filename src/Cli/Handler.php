@@ -3,40 +3,41 @@ declare(strict_types = 1);
 
 namespace Pimarinov\WaveformGenerator\Cli;
 
-use Pimarinov\WaveformGenerator\Data\WaveformCliArgs;
+use Pimarinov\WaveformGenerator\Data\CliHandlerArgs;
 use Pimarinov\WaveformGenerator\Data\Waveform;
-use Pimarinov\WaveformGenerator\RawSilenceToTalkTimesInverter;
+use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
 use Pimarinov\WaveformGenerator\WaveformGenerator;
 
 class Handler
 {
 
-    public function __construct(private WaveformCliArgs $args)
+    public function __construct(private CliHandlerArgs $args)
     {
 
     }
 
     public function execute(): Waveform
     {
-        list($userRaw, $customerRaw) = $this->getRawFromFiles();
+        list($userSilenceRaw, $customerSilenceRaw) = $this->getSilenceRawFromFiles();
 
-        $userConverter = new RawSilenceToTalkTimesInverter($userRaw);
-        $user = $userConverter->collect();
+        $userTalkTimes = (new SpeakerTalkTimes($userSilenceRaw))
+            ->getTalkTimes();
 
-        $customerConverter = new RawSilenceToTalkTimesInverter($customerRaw);
-        $customer = $customerConverter->collect();
+        $customerTalkTimes = (new SpeakerTalkTimes($customerSilenceRaw))
+            ->getTalkTimes();
 
-        $generator = new WaveformGenerator($user, $customer);
+        $generator = new WaveformGenerator($userTalkTimes, $customerTalkTimes);
 
-        return $generator->generate();
+        return $generator->getWaveform();
     }
 
-    private function getRawFromFiles(): array
+    private function getSilenceRawFromFiles(): array
     {
         if (!file_exists($this->args->user))
         {
             throw new \Exception('FILE ERROR (user): No such file.');
         }
+
         if (!file_exists($this->args->customer))
         {
             throw new \Exception('FILE ERROR (customer): No such file.');

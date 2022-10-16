@@ -3,20 +3,20 @@ declare(strict_types = 1);
 
 namespace Pimarinov\WaveformGenerator;
 
-use Pimarinov\WaveformGenerator\Data\TalkTimesOfParticipant;
+use Pimarinov\WaveformGenerator\Data\TalkTimes;
 use Pimarinov\WaveformGenerator\Data\Waveform;
 
 class WaveformGenerator
 {
 
     public function __construct(
-        private TalkTimesOfParticipant $user, private TalkTimesOfParticipant $customer
+        private TalkTimes $user, private TalkTimes $customer
     )
     {
 
     }
 
-    public function generate(): Waveform
+    public function getWaveform(): Waveform
     {
         return new Waveform(
             $this->user->longest, $this->customer->longest,

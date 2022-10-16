@@ -3,9 +3,9 @@ declare(strict_types = 1);
 
 namespace Pimarinov\WaveformGenerator;
 
-use Pimarinov\WaveformGenerator\Data\TalkTimesOfParticipant;
+use Pimarinov\WaveformGenerator\Data\TalkTimes;
 
-class RawSilenceToTalkTimesInverter
+class SpeakerTalkTimes
 {
 
     public function __construct(private string $raw)
@@ -13,18 +13,18 @@ class RawSilenceToTalkTimesInverter
 
     }
 
-    public function collect(): TalkTimesOfParticipant
+    public function getTalkTimes(): TalkTimes
     {
-        $collection = new TalkTimesOfParticipant();
+        $talkTimes = new TalkTimes();
 
         foreach ($this->getPeriods() as $period)
         {
             list($start, $end) = $period;
 
-            $collection->addTimeBySilance($start, $end);
+            $talkTimes->addTimeBySilance($start, $end);
         }
 
-        return $collection;
+        return $talkTimes;
     }
 
     private function getPeriods(): array

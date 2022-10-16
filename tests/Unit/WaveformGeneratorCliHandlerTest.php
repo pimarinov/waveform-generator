@@ -6,7 +6,7 @@ namespace Pimarinov\WaveformGenerator\Test\Unit;
 
 use Pimarinov\WaveformGenerator\Cli\Handler;
 use Pimarinov\WaveformGenerator\Data\Waveform;
-use Pimarinov\WaveformGenerator\Data\WaveformCliArgs;
+use Pimarinov\WaveformGenerator\Data\CliHandlerArgs;
 use PHPUnit\Framework\TestCase;
 
 class WaveformGeneratorCliHandlerTest extends TestCase
@@ -17,7 +17,7 @@ class WaveformGeneratorCliHandlerTest extends TestCase
         $userFile = __DIR__ . '/../dummy-raw-silence/user.dummy-raw-silence.txt';
         $customerFile = __DIR__ . '/../dummy-raw-silence/customer.dummy-raw-silence.txt';
 
-        $args = new WaveformCliArgs($userFile, $customerFile);
+        $args = new CliHandlerArgs($userFile, $customerFile);
 
         $handler = new Handler($args);
 
@@ -32,7 +32,7 @@ class WaveformGeneratorCliHandlerTest extends TestCase
         $userFile = __DIR__ . 'missing.txt';
         $customerFile = __DIR__ . '/../dummy-raw-silence/customer.dummy-raw-silence.txt';
 
-        $args = new WaveformCliArgs($userFile, $customerFile);
+        $args = new CliHandlerArgs($userFile, $customerFile);
 
         $handler = new Handler($args);
 
@@ -47,7 +47,7 @@ class WaveformGeneratorCliHandlerTest extends TestCase
         $userFile = __DIR__ . '/../dummy-raw-silence/user.dummy-raw-silence.txt';
         $customerFile = __DIR__ . 'missing.txt';
 
-        $args = new WaveformCliArgs($userFile, $customerFile);
+        $args = new CliHandlerArgs($userFile, $customerFile);
 
         $handler = new Handler($args);
 

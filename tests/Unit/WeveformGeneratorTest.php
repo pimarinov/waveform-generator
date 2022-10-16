@@ -6,7 +6,7 @@ namespace Pimarinov\WaveformGenerator\Test\Unit;
 
 use Pimarinov\WaveformGenerator\Data\Waveform;
 use Pimarinov\WaveformGenerator\WaveformGenerator;
-use Pimarinov\WaveformGenerator\RawSilenceToTalkTimesInverter;
+use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
 use PHPUnit\Framework\TestCase;
 
 class WeveformGeneratorTest extends TestCase
@@ -20,15 +20,15 @@ class WeveformGeneratorTest extends TestCase
         $userRaw = file_get_contents($userFile);
         $customerRaw = file_get_contents($customerFile);
 
-        $userTalkTimes = (new RawSilenceToTalkTimesInverter($userRaw))
-            ->collect();
+        $userTalkTimes = (new SpeakerTalkTimes($userRaw))
+            ->getTalkTimes();
         
-        $customerTalkTimes = (new RawSilenceToTalkTimesInverter($customerRaw))
-            ->collect();
+        $customerTalkTimes = (new SpeakerTalkTimes($customerRaw))
+            ->getTalkTimes();
 
         $generator = new WaveformGenerator($userTalkTimes, $customerTalkTimes);
 
-        $result = $generator->generate();
+        $result = $generator->getWaveform();
 
         $this->assertInstanceOf(Waveform::class, $result);
     }

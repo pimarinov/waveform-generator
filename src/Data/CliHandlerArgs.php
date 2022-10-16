@@ -2,7 +2,7 @@
 
 namespace Pimarinov\WaveformGenerator\Data;
 
-class WaveformCliArgs
+class CliHandlerArgs
 {
 
     public function __construct(
