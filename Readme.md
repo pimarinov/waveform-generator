@@ -1,5 +1,5 @@
 
-# Waveform Generator - Jiminny [Backend Task](jiminny-backend-task.md)
+# Waveform Generator - Jiminny Backend Task (@see: [jiminny-backend-task.md](jiminny-backend-task.md))
 
 The goal of this package is to make Waveform object from the silence raw data
 of both conversation participants (User & Customer).
