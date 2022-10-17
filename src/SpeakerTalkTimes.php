@@ -29,6 +29,11 @@ class SpeakerTalkTimes
 
     private function getPeriods(): array
     {
+        if (false === $this->silenceAnnotationsExistsInRaw())
+        {
+            return [];
+        }
+
         $starts = $ends = [];
 
         $rows = explode("\n", $this->raw);
@@ -59,5 +64,11 @@ class SpeakerTalkTimes
         }
 
         return $periods;
+    }
+
+    private function silenceAnnotationsExistsInRaw(): bool
+    {
+        return false !== strpos($this->raw, 'silence_start:') 
+            && false !== strpos($this->raw, 'silence_end:');
     }
 }

@@ -40,7 +40,7 @@ use Pimarinov\WaveformGenerator\Cli\Handler;
 
         $handler = new Handler($args);
 
-        print_r($handler->execute());
+        print_r($handler->execute()->json());
     } catch (Exception $e)
     {
 

@@ -19,16 +19,24 @@ class WaveformGenerator
     public function getWaveform(): Waveform
     {
         return new Waveform(
-            $this->user->longest, $this->customer->longest,
-            $this->getUserTalkPercentage(), $this->user->times, $this->customer->times,
+            $this->user->longest,
+            $this->customer->longest,
+            $this->getUserTalkPercentage(),
+            $this->user->times,
+            $this->customer->times,
         );
     }
 
     private function getUserTalkPercentage(): float
     {
-        $participantsTotal = ($this->user->total + $this->customer->total);
+        $speakersTotal = ($this->user->total + $this->customer->total);
 
-        $persentage = ($this->user->total / $participantsTotal) * 100;
+        if (empty($speakersTotal))
+        {
+            return 0.00;
+        }
+
+        $persentage = ($this->user->total / $speakersTotal) * 100;
 
         return (float) number_format($persentage, 2);
     }

@@ -12,4 +12,9 @@ class Waveform
     {
 
     }
+
+    public function json(int $flags = 0): string
+    {
+        return json_encode($this, $flags);
+    }
 }

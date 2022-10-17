@@ -14,8 +14,9 @@ composer require pimarinov/waveform-generator
 
 ## Usage
 
-You may extend the `Pimarinov\WaveformGenerator\WaveformGenerator`. Then pass both callers
-talk times (inverted by `Pimarinov\WaveformGenerator\SpeakerTalkTimes` from silence raw).
+1. The raw Silence need be converted to talk-times for both speakers;
+2. The talk-times couple is used to generate the conversation's waveform object;
+3. For json response output, call the buil-in `Waveform::json(int $flags = 0)` method.
 
 ```php
 use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
@@ -37,7 +38,7 @@ $waveform = (function ($userRawSilenceFilePath, $customerRawSilenceFilePath): Wa
 
 })();
 
-print_r($waveform);
+print_r($waveform->json());
 
 ```
 
@@ -54,50 +55,7 @@ php bin/waveform.php --user tests/dummy-raw-silence/user.dummy-raw-silence.txt -
 Output:
 
 ```bash
-Pimarinov\WaveformGenerator\Data\Waveform Object
-(
-    [longest_user_monologue] => 2
-    [longest_customer_monologue] => 2
-    [user_talk_percentage] => 50
-    [user] => Array
-        (
-            [0] => Array
-                (
-                    [0] => 0
-                    [1] => 0
-                )
-
-            [1] => Array
-                (
-                    [0] => 2
-                    [1] => 4
-                )
-
-            [2] => Array
-                (
-                    [0] => 6
-                    [1] => 8
-                )
-
-        )
-
-    [customer] => Array
-        (
-            [0] => Array
-                (
-                    [0] => 0
-                    [1] => 2
-                )
-
-            [1] => Array
-                (
-                    [0] => 4
-                    [1] => 6
-                )
-
-        )
-
-)
+{"longest_user_monologue":2,"longest_customer_monologue":2,"user_talk_percentage":50,"user":[[0,0],[2,4],[6,8]],"customer":[[0,2],[4,6]]}
 ```
 
 ## Testing
@@ -108,29 +66,29 @@ vendor/bin/phpunit --coverage-text
 
 Output
 ```bash
-PHPUnit 10.0-gce5b6af0c by Sebastian Bergmann and contributors.
+PHPUnit 10.0-g969707ce1 by Sebastian Bergmann and contributors.
 
 Runtime:       PHP 8.1.9 with Xdebug 3.1.3
 Configuration: C:\dev\waveform-generator\phpunit.xml.dist
 
-....                                                                4 / 4 (100%)
+.............                                                     13 / 13 (100%)
 
-Time: 00:00.246, Memory: 10.00 MB
+Time: 00:00.281, Memory: 10.00 MB
 
-OK (4 tests, 6 assertions)
+OK (13 tests, 17 assertions)
 
-Generating code coverage report in Clover XML format ... done [00:00.004]
+Generating code coverage report in Clover XML format ... done [00:00.005]
 
-Generating code coverage report in HTML format ... done [00:00.085]
+Generating code coverage report in HTML format ... done [00:00.071]
 
 
 Code Coverage Report:
-  2022-10-16 13:01:52
+  2022-10-17 11:49:39
 
  Summary:
   Classes: 100.00% (6/6)
-  Methods: 100.00% (13/13)
-  Lines:   100.00% (50/50)
+  Methods: 100.00% (15/15)
+  Lines:   100.00% (60/60)
 
 Pimarinov\WaveformGenerator\Cli\Handler
   Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 15/ 15)
@@ -139,11 +97,11 @@ Pimarinov\WaveformGenerator\Data\CliHandlerArgs
 Pimarinov\WaveformGenerator\Data\TalkTimes
   Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  7/  7)
 Pimarinov\WaveformGenerator\Data\Waveform
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  2/  2)
 Pimarinov\WaveformGenerator\SpeakerTalkTimes
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 19/ 19)
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 23/ 23)
 Pimarinov\WaveformGenerator\WaveformGenerator
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  7/  7)
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 12/ 12)
 
 ```
 
