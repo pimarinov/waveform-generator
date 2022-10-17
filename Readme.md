@@ -46,7 +46,7 @@ print_r($waveform->json());
 
 ## CLI
 
-This package has built in cli handler, allowing calls via Console:
+This package has built-in cli handler, allowing calls via Console:
 
 ```bash
 php bin/waveform.php --user tests/dummy-raw-silence/user.dummy-raw-silence.txt --customer tests/dummy-raw-silence/customer.dummy-raw-silence.txt
