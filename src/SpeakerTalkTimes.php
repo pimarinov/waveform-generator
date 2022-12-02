@@ -13,7 +13,7 @@ class SpeakerTalkTimes
 
     }
 
-    public function getTalkTimes(): TalkTimes
+    public function getTalkTimes(): \Pimarinov\WaveformGenerator\Data\TalkTimeable
     {
         $talkTimes = new TalkTimes();
 

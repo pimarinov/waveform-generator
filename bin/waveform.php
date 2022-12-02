@@ -34,11 +34,7 @@ use Pimarinov\WaveformGenerator\Cli\Handler;
             throw new Exception('The customer parameter is mandatory.');
         }
 
-        $args = (new Pimarinov\WaveformGenerator\Data\CliHandlerArgs(
-                $opts['user'], $opts['customer']
-        ));
-
-        $handler = new Handler($args);
+        $handler = new Handler($opts['user'], $opts['customer']);
 
         print_r($handler->execute()->json());
     } catch (Exception $e)

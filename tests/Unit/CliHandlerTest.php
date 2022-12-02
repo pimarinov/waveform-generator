@@ -1,12 +1,11 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Pimarinov\WaveformGenerator\Test\Unit\Cli;
 
+use PHPUnit\Framework\TestCase;
 use Pimarinov\WaveformGenerator\Cli\Handler;
 use Pimarinov\WaveformGenerator\Data\Waveform;
-use Pimarinov\WaveformGenerator\Data\CliHandlerArgs;
-use PHPUnit\Framework\TestCase;
 
 class CliHandlerTest extends TestCase
 {
@@ -16,22 +15,20 @@ class CliHandlerTest extends TestCase
         $userFile = __DIR__ . '/../dummy-raw-silence/user.dummy-raw-silence.txt';
         $customerFile = __DIR__ . '/../dummy-raw-silence/customer.dummy-raw-silence.txt';
 
-        $args = new CliHandlerArgs($userFile, $customerFile);
-
-        $handler = new Handler($args);
+        $handler = new Handler($userFile, $customerFile);
 
         $result = $handler->execute();
 
         $this->assertInstanceOf(Waveform::class, $result);
     }
 
-    public function test_waveform_cli_handler_wrong_arg(): void
+    public function test_waveform_cli_handler_wrong_params(): void
     {
         $this->expectException(\TypeError::class);
-        new Handler(new \stdClass());
+        new Handler(null, null);
     }
 
-    public function test_waveform_cli_handler_missing_arg(): void
+    public function test_waveform_cli_handler_missing_params(): void
     {
         $this->expectException(\ArgumentCountError::class);
         new Handler();
@@ -42,9 +39,7 @@ class CliHandlerTest extends TestCase
         $userFile = __DIR__ . 'missing.txt';
         $customerFile = __DIR__ . '/../dummy-raw-silence/customer.dummy-raw-silence.txt';
 
-        $args = new CliHandlerArgs($userFile, $customerFile);
-
-        $handler = new Handler($args);
+        $handler = new Handler($userFile, $customerFile);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('FILE ERROR (user): No such file.');
@@ -56,9 +51,7 @@ class CliHandlerTest extends TestCase
         $userFile = __DIR__ . '/../dummy-raw-silence/user.dummy-raw-silence.txt';
         $customerFile = __DIR__ . 'missing.txt';
 
-        $args = new CliHandlerArgs($userFile, $customerFile);
-
-        $handler = new Handler($args);
+        $handler = new Handler($userFile, $customerFile);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('FILE ERROR (customer): No such file.');

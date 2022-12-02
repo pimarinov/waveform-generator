@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Pimarinov\WaveformGenerator\Test\Unit;
 
-use Pimarinov\WaveformGenerator\Data\Waveform;
-use Pimarinov\WaveformGenerator\WaveformGenerator;
-use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
 use PHPUnit\Framework\TestCase;
+use Pimarinov\WaveformGenerator\Data\Waveform;
+use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
+use Pimarinov\WaveformGenerator\WaveformGenerator;
 
 class WeveformGeneratorTest extends TestCase
 {
@@ -21,7 +21,7 @@ class WeveformGeneratorTest extends TestCase
 
         $userTalkTimes = (new SpeakerTalkTimes($userRaw))
             ->getTalkTimes();
-        
+
         $customerTalkTimes = (new SpeakerTalkTimes($customerRaw))
             ->getTalkTimes();
 
@@ -83,7 +83,7 @@ class WeveformGeneratorTest extends TestCase
 
         $result = $generator->getWaveform();
 
-        $this->assertEquals(New Waveform(0.00, 0.00, 0.00, [], []), $result);
+        $this->assertEquals(new Waveform(0.00, 0.00, 0.00, [], []), $result);
 
         $expectedJson = '{"longest_user_monologue":0,"longest_customer_monologue":0,' .
             '"user_talk_percentage":0,"user":[],"customer":[]}';

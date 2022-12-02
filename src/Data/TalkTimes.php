@@ -1,9 +1,9 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Pimarinov\WaveformGenerator\Data;
 
-class TalkTimes
+class TalkTimes implements TalkTimeable
 {
     public array $times = [];
     public float $total = 0;
@@ -16,13 +16,10 @@ class TalkTimes
 
         $this->times[] = [$this->recentStartTalk, $stopTalk];
 
-        $this->updateTotalAndLongest(($stopTalk - $this->recentStartTalk));
+        $talkPeriod = ($stopTalk - $this->recentStartTalk);
 
         $this->recentStartTalk = $silanceStop;
-    }
 
-    private function updateTotalAndLongest(float $talkPeriod): void
-    {
         $this->total += $talkPeriod;
 
         if ($talkPeriod > $this->longest)
