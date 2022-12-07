@@ -107,6 +107,29 @@ Pimarinov\WaveformGenerator\WaveformGenerator
 
 ![test-output](phpunit-test-output.png)
 
+## Docker
+
+1. Build
+
+```bash
+docker build -t waveform-generator .
+
+```
+
+2. Run
+
+```bash
+docker run --rm -it waveform-generator bash
+
+```
+
+And within the container you can run tests: `vendor/bin/phpunit --coverage-text` 
+
+or the cli-handler
+```bash
+php bin/waveform.php --user tests/dummy-raw-silence/user.dummy-raw-silence.txt --customer tests/dummy-raw-silence/customer.dummy-raw-silence.txt
+```
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
