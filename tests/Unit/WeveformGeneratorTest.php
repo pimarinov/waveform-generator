@@ -6,7 +6,7 @@ namespace Pimarinov\WaveformGenerator\Test\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Pimarinov\WaveformGenerator\Data\Waveform;
-use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
+use Pimarinov\WaveformGenerator\SpeakerSilenceToTalkTimes;
 use Pimarinov\WaveformGenerator\WaveformGenerator;
 
 class WeveformGeneratorTest extends TestCase
@@ -19,10 +19,10 @@ class WeveformGeneratorTest extends TestCase
         $userRaw = file_get_contents($userFile);
         $customerRaw = file_get_contents($customerFile);
 
-        $userTalkTimes = (new SpeakerTalkTimes($userRaw))
+        $userTalkTimes = (new SpeakerSilenceToTalkTimes($userRaw))
             ->getTalkTimes();
 
-        $customerTalkTimes = (new SpeakerTalkTimes($customerRaw))
+        $customerTalkTimes = (new SpeakerSilenceToTalkTimes($customerRaw))
             ->getTalkTimes();
 
         $generator = new WaveformGenerator($userTalkTimes, $customerTalkTimes);
@@ -40,7 +40,7 @@ class WeveformGeneratorTest extends TestCase
 
     public function test_waveform_call_with_wrong_user_arguments(): void
     {
-        $customerTalkTimes = (new SpeakerTalkTimes(''))
+        $customerTalkTimes = (new SpeakerSilenceToTalkTimes(''))
             ->getTalkTimes();
 
         $this->expectException(\TypeError::class);
@@ -49,7 +49,7 @@ class WeveformGeneratorTest extends TestCase
 
     public function test_waveform_call_with_wrong_customer_arguments(): void
     {
-        $userTalkTimes = (new SpeakerTalkTimes(''))
+        $userTalkTimes = (new SpeakerSilenceToTalkTimes(''))
             ->getTalkTimes();
 
         $this->expectException(\TypeError::class);
@@ -64,7 +64,7 @@ class WeveformGeneratorTest extends TestCase
 
     public function test_waveform_cli_handler_missing_second_arg(): void
     {
-        $userTalkTimes = (new SpeakerTalkTimes(''))
+        $userTalkTimes = (new SpeakerSilenceToTalkTimes(''))
             ->getTalkTimes();
 
         $this->expectException(\ArgumentCountError::class);
@@ -73,10 +73,10 @@ class WeveformGeneratorTest extends TestCase
 
     public function test_waveform_call_with_empty_silence_raws(): void
     {
-        $userTalkTimes = (new SpeakerTalkTimes(''))
+        $userTalkTimes = (new SpeakerSilenceToTalkTimes(''))
             ->getTalkTimes();
 
-        $customerTalkTimes = (new SpeakerTalkTimes(''))
+        $customerTalkTimes = (new SpeakerSilenceToTalkTimes(''))
             ->getTalkTimes();
 
         $generator = new WaveformGenerator($userTalkTimes, $customerTalkTimes);

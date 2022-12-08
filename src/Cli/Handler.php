@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Pimarinov\WaveformGenerator\Cli;
 
 use Pimarinov\WaveformGenerator\Data\Waveform;
-use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
+use Pimarinov\WaveformGenerator\SpeakerSilenceToTalkTimes;
 use Pimarinov\WaveformGenerator\WaveformGenerator;
 
 class Handler
@@ -30,10 +30,10 @@ class Handler
 
         $customerSilenceRaw = file_get_contents($this->customerFile);
 
-        $userTalkTimes = (new SpeakerTalkTimes($userSilenceRaw))
+        $userTalkTimes = (new SpeakerSilenceToTalkTimes($userSilenceRaw))
             ->getTalkTimes();
 
-        $customerTalkTimes = (new SpeakerTalkTimes($customerSilenceRaw))
+        $customerTalkTimes = (new SpeakerSilenceToTalkTimes($customerSilenceRaw))
             ->getTalkTimes();
 
         $generator = new WaveformGenerator($userTalkTimes, $customerTalkTimes);

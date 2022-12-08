@@ -5,7 +5,7 @@ namespace Pimarinov\WaveformGenerator;
 
 use Pimarinov\WaveformGenerator\Data\TalkTimes;
 
-class SpeakerTalkTimes
+class SpeakerSilenceToTalkTimes
 {
 
     public function __construct(private string $raw)

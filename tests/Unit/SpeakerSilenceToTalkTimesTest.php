@@ -5,14 +5,14 @@ namespace Pimarinov\WaveformGenerator\Test\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Pimarinov\WaveformGenerator\Data\TalkTimes;
-use Pimarinov\WaveformGenerator\SpeakerTalkTimes;
+use Pimarinov\WaveformGenerator\SpeakerSilenceToTalkTimes;
 
-class SpeakerTalkTimesTest extends TestCase
+class SpeakerSilenceToTalkTimesTest extends TestCase
 {
 
     public function test_speaker_talk_times_with_wrong_content(): void
     {
-        $talkTimes = new SpeakerTalkTimes('');
+        $talkTimes = new SpeakerSilenceToTalkTimes('');
 
         $this->assertEquals(new TalkTimes(), $talkTimes->getTalkTimes());
     }
@@ -20,6 +20,6 @@ class SpeakerTalkTimesTest extends TestCase
     public function test_speaker_talk_times_missing_arg(): void
     {
         $this->expectException(\ArgumentCountError::class);
-        new SpeakerTalkTimes();
+        new SpeakerSilenceToTalkTimes();
     }
 }
