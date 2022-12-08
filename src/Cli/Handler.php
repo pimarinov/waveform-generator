@@ -26,9 +26,14 @@ class Handler
             throw new \Exception('FILE ERROR (customer): No such file.');
         }
 
-        $userSilenceRaw = file_get_contents($this->userFile);
-
-        $customerSilenceRaw = file_get_contents($this->customerFile);
+        if ($userStream = fopen($this->userFile, 'r')) {
+            $userSilenceRaw = stream_get_contents($userStream);
+            fclose($userStream);
+        }
+        if ($customerStream = fopen($this->customerFile, 'r')) {
+            $customerSilenceRaw = stream_get_contents($customerStream);
+            fclose($customerStream);
+        }
 
         $userTalkTimes = (new SpeakerSilenceToTalkTimes($userSilenceRaw))
             ->getTalkTimes();
