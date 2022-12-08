@@ -1,4 +1,4 @@
-# Waveform Generator (Backend Take-home Task) &mdash; [see original](https://raw.githubusercontent.com/jiminny/join-the-team/master/backend-task.md)
+# Waveform Generator (Backend Task)
 
 The task solves a real-world problem related to converting an audio file into a useful waveform structure. Waveforms are a key way for our customers to visualize speech data.
 
@@ -8,7 +8,7 @@ We recommend writing answers in whatever language you’re most comfortable in. 
 
 ## Brief
 
-Write a program to consume the raw output from an audio silence detection [filter](https://ffmpeg.org/ffmpeg-filters.html#silencedetect) and convert it into a useful format for consumption by other APIs. The `ffmpeg` command has been run for a sample call and we've linked the raw data for both the [`user` channel](https://github.com/jiminny/join-the-team/blob/master/assets/user-channel.txt), and the [`customer` channel](https://github.com/jiminny/join-the-team/blob/master/assets/customer-channel.txt).
+Write a program to consume the raw output from an audio silence detection [filter](https://ffmpeg.org/ffmpeg-filters.html#silencedetect) and convert it into a useful format for consumption by other APIs. The `ffmpeg` command has been run for a sample call and we've linked the raw data for both the [`user` channel](tests/example-raw-silence/user-channel.txt), and the [`customer` channel](tests/example-raw-silence/customer-channel.txt).
 
 The files contain data about a real conversation between two parties on a conference call with the following structure:
 
