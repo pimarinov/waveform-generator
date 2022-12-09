@@ -28,6 +28,8 @@ jobs:
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-install xdebug
+      - run: echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/xdebug.ini
 
       # prepare the database
       # - run: touch storage/testing.sqlite
