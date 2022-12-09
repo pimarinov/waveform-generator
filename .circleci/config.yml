@@ -27,8 +27,7 @@ jobs:
       - checkout
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
-      - run: pecl install -f xdebug -y
+      - run: sudo docker-php-ext-install zip xdebug
       - run: sudo docker-php-ext-enable xdebug
       - run: echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/xdebug.ini
 
