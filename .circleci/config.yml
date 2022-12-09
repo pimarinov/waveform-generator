@@ -38,8 +38,8 @@ jobs:
       # run tests with phpunit or codecept
       - run: 
           name: "Run tests"
-          command: ./vendor/bin/phpunit
           environment:
             XDEBUG_MODE: coverage
+          command: ./vendor/bin/phpunit
       # - run: ./vendor/bin/codecept build
       # - run: ./vendor/bin/codecept run
