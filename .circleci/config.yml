@@ -27,7 +27,7 @@ jobs:
       - checkout
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo -E install-php-extensions xdebug
+      # - run: sudo -E install-php-extensions xdebug
       # - run: sudo docker-php-ext-install zip
       # - run: sudo docker-php-ext-enable xdebug
       # - run: echo "xdebug.mode=coverage" >> /usr/local/lib/php/conf.d/xdebug.ini
@@ -37,6 +37,6 @@ jobs:
       # - run: php artisan migrate --env=testing --database=sqlite_testing --force
 
       # run tests with phpunit or codecept
-      - run: vendor/bin/phpunit
+      - run: /home/circleci/project/vendor/bin/phpunit
       # - run: ./vendor/bin/codecept build
       # - run: ./vendor/bin/codecept run
