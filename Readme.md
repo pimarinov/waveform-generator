@@ -6,7 +6,7 @@ of both conversation participants ([User](tests/example-raw-silence/user-channel
 
 ## Installation
 
-Install via Composer:
+Install via Composer: 
 
 ```bash
 composer require pimarinov/waveform-generator
