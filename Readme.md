@@ -123,7 +123,7 @@ docker run --rm -it waveform-generator bash
 
 ```
 
-And within the container you can run tests: `vendor/bin/phpunit --coverage-text` 
+And within the container you can run tests: `vendor/bin/phpunit --coverage-text`
 
 or the cli-handler `php bin/waveform.php --user tests/dummy-raw-silence/user.dummy-raw-silence.txt --customer tests/dummy-raw-silence/customer.dummy-raw-silence.txt`
 
