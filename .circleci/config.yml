@@ -31,7 +31,6 @@ jobs:
       - run: sudo -E install-php-extensions xdebug
       # - run: sudo docker-php-ext-install zip
       - run: sudo docker-php-ext-enable xdebug
-      - run: php -r "ini_set('xdebug.mode', 'coverage');"
       # - run: echo "xdebug.mode=coverage" >> /usr/local/lib/php/conf.d/xdebug.ini
 
       # prepare the database
@@ -39,6 +38,6 @@ jobs:
       # - run: php artisan migrate --env=testing --database=sqlite_testing --force
 
       # run tests with phpunit or codecept
-      - run: ./vendor/bin/phpunit
+      - run: php -r "ini_set('XDEBUG_MODE', 'coverage');" ./vendor/bin/phpunit
       # - run: ./vendor/bin/codecept build
       # - run: ./vendor/bin/codecept run
