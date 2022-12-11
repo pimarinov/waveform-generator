@@ -1,9 +1,9 @@
 # Waveform Generator - Backend Task | [backend-task.md](backend-task.md)
 
-[![pimarinov](https://circleci.com/bb/pimarinov/waveform-generator.svg?style=svg)](https://app.circleci.com/pipelines/bitbucket/pimarinov/waveform-generator)
-
 The goal of this package is to make Waveform object from the silence raw data
 of both conversation participants ([User](tests/example-raw-silence/user-channel.txt) & [Customer](tests/example-raw-silence/customer-channel.txt)).
+
+[![pimarinov](https://circleci.com/bb/pimarinov/waveform-generator.svg?style=svg)](https://app.circleci.com/pipelines/bitbucket/pimarinov/waveform-generator)
 
 ## Installation
 
