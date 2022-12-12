@@ -1,4 +1,4 @@
-# Waveform Generator - Backend Task | [backend-task.md](backend-task.md)
+# Waveform Generator - [Backend Task](backend-task.md)
 
 The goal of this package is to make Waveform object from the silence raw data
 of both conversation participants ([User](tests/example-raw-silence/user-channel.txt) & [Customer](tests/example-raw-silence/customer-channel.txt)).
